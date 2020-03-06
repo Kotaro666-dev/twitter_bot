@@ -1,13 +1,28 @@
-console.log(`filename: ${__filename}`);
-console.log(`dirname: ${__dirname}`);
+// console.log(`filename: ${__filename}`);
+// console.log(`dirname: ${__dirname}`);
 
-let url = "https://mylogger.io/log";
+const EventEmitter = require("events");
+// => class
+// const emitter = new EventEmitter();
 
-function log(message) {
-  // Send an HTTP request
-  console.log(message);
+// let url = "https://mylogger.io/log";
+
+class Logger extends EventEmitter {
+  // function in class is called method
+  log(message) {
+    // Send an HTTP request
+    console.log(message);
+
+    // emit =  Making a noise, produce - signalling
+    // Raise an event
+    this.emit("messageLogged", {
+      id: 1,
+      url: "https://~~~~",
+      data: "message"
+    });
+  }
 }
 
 // module.exports.log = log;
 // module.exports.endPoint = url;
-module.exports = log;
+module.exports = Logger;

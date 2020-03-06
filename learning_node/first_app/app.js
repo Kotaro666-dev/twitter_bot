@@ -46,13 +46,50 @@
 // console.log(`free memory: ${freeMemory}.`);
 // console.log(`occupied memory: ${occupiedMemory.toFixed(0)}%.`);
 
-const fs = require("fs");
+// const fs = require("fs");
 
 // let files = fs.readdirSync("./");
 // console.log(files);
 
-fs.readdir("$", function(error, files) {
-  if (error) console.log("Error", error);
-  else console.log("Result", files);
+// fs.readdir("$", function(error, files) {
+//   if (error) console.log("Error", error);
+//   else console.log("Result", files);
+// });
+// // console.log(files2);
+
+/*
+const EventEmitter = require("events");
+
+const Logger = require("./logger");
+const logger = new Logger();
+
+// Register a listener
+logger.on("messageLogged", arg => {
+  // e, eventArg
+  console.log("Listener called", arg);
 });
-// console.log(files2);
+
+logger.log("message");
+*/
+
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.write("Hello world");
+    res.end();
+  }
+
+  if (req.url === "/api/courses") {
+    res.write(JSON.stringify([1, 2, 3]));
+    res.end();
+  }
+});
+
+// server.on("connection", socket => {
+//   console.log("New connection");
+// });
+
+server.listen(3000);
+
+console.log("Listening on port 3000....");
